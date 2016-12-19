@@ -134,7 +134,7 @@ Potree.utils.createBackgroundTexture = function(width, height){
 	var data = map.image.data;
 
 	//var data = new Uint8Array(width*height*4);
-	var chroma = [1, 1.5, 1.7];
+	var chroma = [3.2, 3.5, 3.8]; // [1, 1.5, 1.7];
 	var max = gauss(0, 0);
 
 	for(var x = 0; x < width; x++){

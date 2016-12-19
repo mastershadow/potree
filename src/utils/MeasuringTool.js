@@ -263,7 +263,7 @@ Potree.Measure = function(){
 		// update area label
 		this.areaLabel.position.copy(centroid);
 		this.areaLabel.visible = this.showArea && this.points.length >= 3;
-		var msg = Potree.utils.addCommas(this.getArea().toFixed(1)) + "²";
+		var msg = Potree.utils.addCommas(this.getArea().toFixed(1)) + " m²";
 		this.areaLabel.setText(msg);
 	};
 	

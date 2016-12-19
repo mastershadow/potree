@@ -34,7 +34,7 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 	var dragEnd = new THREE.Vector2();
 	
 	var sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-	var sphereMaterial = new THREE.MeshNormalMaterial({shading: THREE.SmoothShading, transparent: true, opacity: 0.5});
+	var sphereMaterial = new THREE.MeshLambertMaterial({shading: THREE.SmoothShading, transparent: false, opacity: 1.0, color: 0xFFFF00});
 	this.pivotNode = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
 	var mouseDelta = new THREE.Vector2();
@@ -43,8 +43,8 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 	var pivot = null;
 	
 	
-	this.minAngle = (10 / 180) * Math.PI;	// 10°
-	this.maxAngle = (70 / 180) * Math.PI;	// 70°
+	this.minAngle = (5 / 180) * Math.PI;	// 5
+	this.maxAngle = (85 / 180) * Math.PI;	// 85°
 
 	this.update = function (delta) {
 		var position = this.camera.position;
@@ -146,7 +146,7 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 			}
 			
 			var wp = this.pivotNode.getWorldPosition().applyMatrix4(this.camera.matrixWorldInverse);
-			var w = Math.abs(wp.z  / 30);
+			var w = Math.abs(wp.z  / 50);
 			var l = this.pivotNode.scale.length();
 			this.pivotNode.scale.multiplyScalar(w / l);
 		}
