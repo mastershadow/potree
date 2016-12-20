@@ -123,7 +123,7 @@ Potree.utils.createGrid = function createGrid(width, length, spacing, color){
 }
 
 
-Potree.utils.createBackgroundTexture = function(width, height){
+Potree.utils.createBackgroundTexture = function(width, height, userChroma){
 
 	function gauss(x, y){
 		return (1 / (2 * Math.PI)) * Math.exp( - (x*x + y*y) / 2);
@@ -133,8 +133,7 @@ Potree.utils.createBackgroundTexture = function(width, height){
 	map.magFilter = THREE.NearestFilter;
 	var data = map.image.data;
 
-	//var data = new Uint8Array(width*height*4);
-	var chroma = [3.2, 3.5, 3.8]; // [1, 1.5, 1.7];
+	var chroma = userChroma || [3.2, 3.5, 3.8];
 	var max = gauss(0, 0);
 
 	for(var x = 0; x < width; x++){
@@ -150,9 +149,9 @@ Potree.utils.createBackgroundTexture = function(width, height){
 			
 			//d = Math.pow(d, 0.6);
 			
-			data[3*i+0] = 255 * (d / 15 + 0.05 + r) * chroma[0];
-			data[3*i+1] = 255 * (d / 15 + 0.05 + r) * chroma[1];
-			data[3*i+2] = 255 * (d / 15 + 0.05 + r) * chroma[2];
+			data[3*i+0] = Math.min(255, 255 * (d / 15 + 0.05 + r) * chroma[0]);
+			data[3*i+1] = Math.min(255, 255 * (d / 15 + 0.05 + r) * chroma[1]);
+			data[3*i+2] = Math.min(255, 255 * (d / 15 + 0.05 + r) * chroma[2]);
 			
 			//data[4*i+3] = 255;
 		
