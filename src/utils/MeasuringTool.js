@@ -344,8 +344,9 @@ Potree.MeasuringTool = function(scene, camera, renderer){
 	this.sceneMeasurement.add(this.sceneRoot);
 	
 	this.light = new THREE.DirectionalLight( 0xffffff, 1 );
-	this.light.position.set( 0, 0, 10 );
-	this.light.lookAt(new THREE.Vector3(0,0,0));
+	this.light.position.copy(this.camera.position);
+	this.lightTarget = new THREE.Vector3(0,0,0);
+	this.light.lookAt(this.lightTarget);
 	this.sceneMeasurement.add( this.light );
 	
 	this.hoveredElement = null;
@@ -571,7 +572,7 @@ Potree.MeasuringTool = function(scene, camera, renderer){
 	};
 	
 	this.finishInsertion = function(){
-		this.activeMeasurement.removeMarker(this.activeMeasurement.points.length-1);
+		this.activeMeasurement.removeMarker(this.activeMeasurement.points.length - 1);
 		
 		var event = {
 			type: "insertion_finished",
@@ -666,7 +667,8 @@ Potree.MeasuringTool = function(scene, camera, renderer){
 		}
 	
 		this.light.position.copy(this.camera.position);
-		this.light.lookAt(this.camera.getWorldDirection().add(this.camera.position));
+		this.lightTarget.copy(this.camera.position).add(this.camera.getWorldDirection());
+		this.light.lookAt(this.lightTarget);
 		
 	};
 	

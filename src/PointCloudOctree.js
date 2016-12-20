@@ -887,7 +887,7 @@ Potree.PointCloudOctree.prototype.pick = function(renderer, camera, ray, params)
 				
 				}else{
 					if(values.itemSize === 1){
-						point[property] = values.array[i + j];
+						point[property] = values.array[hit.pIndex];
 					}else{
 						var value = [];
 						for(var j = 0; j < values.itemSize; j++){
