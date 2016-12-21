@@ -6688,16 +6688,18 @@ Potree.MeasuringTool = function(scene, camera, renderer){
 	};
 	
 	this.finishInsertion = function(){
-		this.activeMeasurement.removeMarker(this.activeMeasurement.points.length - 1);
-		
-		var event = {
-			type: "insertion_finished",
-			measurement: this.activeMeasurement
-		};
-		this.dispatchEvent(event);
-		
-		this.activeMeasurement = null;
-		state = STATE.DEFAULT;
+		if (state == STATE.INSERT) {
+			this.activeMeasurement.removeMarker(this.activeMeasurement.points.length - 1);
+			
+			var event = {
+				type: "insertion_finished",
+				measurement: this.activeMeasurement
+			};
+			this.dispatchEvent(event);
+			
+			this.activeMeasurement = null;
+			state = STATE.DEFAULT;
+		}
 	};
 	
 	this.addMeasurement = function(measurement){
