@@ -872,10 +872,10 @@ Potree.PointCloudOctree.prototype.pick = function(renderer, camera, ray, params)
 		
 		for (var property in attributes) {
 			if (attributes.hasOwnProperty(property)) {
-				var values = geometry.attributes[property];
+				var values = pc.geometry.attributes[property];
 			
 				if(property === "position"){
-					var positionArray = pc.geometry.attributes.position.array;
+					var positionArray = values.array;
 					var x = positionArray[3*hit.pIndex+0];
 					var y = positionArray[3*hit.pIndex+1];
 					var z = positionArray[3*hit.pIndex+2];
@@ -891,7 +891,7 @@ Potree.PointCloudOctree.prototype.pick = function(renderer, camera, ray, params)
 					}else{
 						var value = [];
 						for(var j = 0; j < values.itemSize; j++){
-							value.push(values.array[i*values.itemSize + j]);
+							value.push(values.array[hit.pIndex * values.itemSize + j]);
 						}
 						point[property] = value;
 					}
