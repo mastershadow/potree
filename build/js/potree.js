@@ -3760,10 +3760,15 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 				this.camera.rotation.copy(proposal.rotation);
 			}
 			
-			var wp = this.pivotNode.getWorldPosition().applyMatrix4(this.camera.matrixWorldInverse);
-			var w = Math.abs(wp.z  / 50);
-			var l = this.pivotNode.scale.length();
-			this.pivotNode.scale.multiplyScalar(w / l);
+			// var wp = this.pivotNode.getWorldPosition().applyMatrix4(this.camera.matrixWorldInverse);
+			// var w = Math.abs(wp.z  / 50);
+			// var l = this.pivotNode.scale.length();
+			// this.pivotNode.scale.multiplyScalar(w / l);
+
+            var distance = this.camera.position.distanceTo(this.pivotNode.getWorldPosition());
+			var pr = ((1 / Math.tan(this.camera.fov * (Math.PI / 180) * 0.5)) / distance) * (this.domElement.clientHeight / 2);
+            var scale = (10 / pr);
+            this.pivotNode.scale.set(scale, scale, scale);
 		}
 		
 		
