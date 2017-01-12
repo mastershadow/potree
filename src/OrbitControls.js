@@ -342,6 +342,17 @@ Potree.OrbitControls = function ( object, domElement ) {
 
 	};
 
+	this.clearState = function() {
+		clearState();
+	};
+
+	function clearState() {
+		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
+		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
+		scope.dispatchEvent(endEvent);
+		state = STATE.NONE;
+	}
+
 	function getAutoRotationAngle() {
 
 		return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
@@ -448,14 +459,8 @@ Potree.OrbitControls = function ( object, domElement ) {
 	}
 
 	function onMouseUp( /* event */ ) {
-
 		if ( scope.enabled === false ) return;
-
-		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
-		scope.dispatchEvent( endEvent );
-		state = STATE.NONE;
-
+		clearState();
 	}
 
 	function onMouseWheel( event ) {

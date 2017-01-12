@@ -163,6 +163,17 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 		this.camera.position.copy( this.position0 );
 	};
 
+	this.clearState = function() {
+		clearState();
+	};
+
+	function clearState() {
+		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
+		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
+		state = STATE.NONE;
+		scope.scene.remove(scope.pivotNode);
+	}
+
 	function onMouseDown( event ) {
 		if ( scope.enabled === false ) return;
 		event.preventDefault();
@@ -223,14 +234,7 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 
 	function onMouseUp() {
 		if ( scope.enabled === false ) return;
-
-		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
-		state = STATE.NONE;
-		
-		//scope.dragStartIndicator.style.display = "none";
-		scope.scene.remove(scope.pivotNode);
-
+		clearState();
 	}
 
 	function onMouseWheel(event) {

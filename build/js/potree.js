@@ -2812,6 +2812,17 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 		this.object.position.copy( this.position0 );
 	};
 
+	this.clearState = function() {
+		clearState();
+	};
+
+	function clearState() {
+		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
+		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
+		scope.dispatchEvent( endEvent );
+		state = STATE.NONE;
+	}
+
 	function onMouseDown( event ) {
 		if ( scope.enabled === false ) return;
 		event.preventDefault();
@@ -2864,12 +2875,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 	function onMouseUp() {
 		if ( scope.enabled === false ) return;
-
-		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
-		scope.dispatchEvent( endEvent );
-		state = STATE.NONE;
-
+		clearState();
 	}
 
 	function onMouseWheel(event) {
@@ -3269,6 +3275,17 @@ Potree.OrbitControls = function ( object, domElement ) {
 
 	};
 
+	this.clearState = function() {
+		clearState();
+	};
+
+	function clearState() {
+		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
+		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
+		scope.dispatchEvent(endEvent);
+		state = STATE.NONE;
+	}
+
 	function getAutoRotationAngle() {
 
 		return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
@@ -3375,14 +3392,8 @@ Potree.OrbitControls = function ( object, domElement ) {
 	}
 
 	function onMouseUp( /* event */ ) {
-
 		if ( scope.enabled === false ) return;
-
-		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
-		scope.dispatchEvent( endEvent );
-		state = STATE.NONE;
-
+		clearState();
 	}
 
 	function onMouseWheel( event ) {
@@ -3767,6 +3778,17 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 		this.camera.position.copy( this.position0 );
 	};
 
+	this.clearState = function() {
+		clearState();
+	};
+
+	function clearState() {
+		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
+		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
+		state = STATE.NONE;
+		scope.scene.remove(scope.pivotNode);
+	}
+
 	function onMouseDown( event ) {
 		if ( scope.enabled === false ) return;
 		event.preventDefault();
@@ -3827,14 +3849,7 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 
 	function onMouseUp() {
 		if ( scope.enabled === false ) return;
-
-		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
-		state = STATE.NONE;
-		
-		//scope.dragStartIndicator.style.display = "none";
-		scope.scene.remove(scope.pivotNode);
-
+		clearState();
 	}
 
 	function onMouseWheel(event) {

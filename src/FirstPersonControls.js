@@ -259,6 +259,17 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 		this.object.position.copy( this.position0 );
 	};
 
+	this.clearState = function() {
+		clearState();
+	};
+
+	function clearState() {
+		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
+		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
+		scope.dispatchEvent( endEvent );
+		state = STATE.NONE;
+	}
+
 	function onMouseDown( event ) {
 		if ( scope.enabled === false ) return;
 		event.preventDefault();
@@ -311,12 +322,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 
 	function onMouseUp() {
 		if ( scope.enabled === false ) return;
-
-		scope.domElement.removeEventListener( 'mousemove', onMouseMove, false );
-		scope.domElement.removeEventListener( 'mouseup', onMouseUp, false );
-		scope.dispatchEvent( endEvent );
-		state = STATE.NONE;
-
+		clearState();
 	}
 
 	function onMouseWheel(event) {
