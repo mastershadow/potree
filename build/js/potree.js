@@ -1696,6 +1696,16 @@ Potree.Gradients = {
 		[5/6, new THREE.Color(1, 0.64, 0)],
 		[1, new THREE.Color(1, 0, 0)]
 	],
+	INFRARED: [
+[0/7, new THREE.Color(20/255.0, 7/255.0, 20/255.0)],
+[1/7, new THREE.Color(155/255.0, 86/255.0, 195/255.0)],
+[2/7, new THREE.Color(36/255.0, 67/255.0, 253/255.0)],
+[3/7, new THREE.Color(1/255.0, 188/255.0, 255/255.0)],
+[4/7, new THREE.Color(0/255.0, 195/255.0, 100/255.0)],
+[5/7, new THREE.Color(255/255.0, 61/255.0, 0/255.0)],
+[6/7, new THREE.Color(254/255.0, 251/255.0, 125/255.0)],
+[7/7, new THREE.Color(255/255.0, 255/255.0, 255/255.0)]
+	],
 	GRAYSCALE: [
 		[0, new THREE.Color(0,0,0)],
 		[1, new THREE.Color(1,1,1)]
@@ -1785,7 +1795,7 @@ Potree.PointCloudMaterial = function(parameters){
 	this._clipMode = Potree.ClipMode.DISABLED;
 	this._weighted = false;
 	this._depthMap;
-	this._gradient = Potree.Gradients.RAINBOW;
+	this._gradient = Potree.Gradients.INFRARED;
 	this._classification = Potree.Classification.DEFAULT;
 	this.gradientTexture = Potree.PointCloudMaterial.generateGradientTexture(this._gradient);
 	this.classificationTexture = Potree.PointCloudMaterial.generateClassificationTexture(this._classification);
@@ -3759,15 +3769,10 @@ THREE.EarthControls = function ( camera, renderer, scene ) {
 				this.camera.position.copy(proposal.position);
 				this.camera.rotation.copy(proposal.rotation);
 			}
-			
-			// var wp = this.pivotNode.getWorldPosition().applyMatrix4(this.camera.matrixWorldInverse);
-			// var w = Math.abs(wp.z  / 50);
-			// var l = this.pivotNode.scale.length();
-			// this.pivotNode.scale.multiplyScalar(w / l);
 
             var distance = this.camera.position.distanceTo(this.pivotNode.getWorldPosition());
 			var pr = ((1 / Math.tan(this.camera.fov * (Math.PI / 180) * 0.5)) / distance) * (this.domElement.clientHeight / 2);
-            var scale = (10 / pr);
+            var scale = (8 / pr);
             this.pivotNode.scale.set(scale, scale, scale);
 		}
 		

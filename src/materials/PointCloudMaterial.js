@@ -18,6 +18,16 @@ Potree.Gradients = {
 		[5/6, new THREE.Color(1, 0.64, 0)],
 		[1, new THREE.Color(1, 0, 0)]
 	],
+	INFRARED: [
+		[0/7, new THREE.Color(20/255.0, 7/255.0, 20/255.0)],
+		[1/7, new THREE.Color(155/255.0, 86/255.0, 195/255.0)],
+		[2/7, new THREE.Color(36/255.0, 67/255.0, 253/255.0)],
+		[3/7, new THREE.Color(1/255.0, 188/255.0, 255/255.0)],
+		[4/7, new THREE.Color(0/255.0, 195/255.0, 100/255.0)],
+		[5/7, new THREE.Color(255/255.0, 61/255.0, 0/255.0)],
+		[6/7, new THREE.Color(254/255.0, 251/255.0, 125/255.0)],
+		[7/7, new THREE.Color(255/255.0, 255/255.0, 255/255.0)]
+	],
 	GRAYSCALE: [
 		[0, new THREE.Color(0,0,0)],
 		[1, new THREE.Color(1,1,1)]
@@ -107,7 +117,7 @@ Potree.PointCloudMaterial = function(parameters){
 	this._clipMode = Potree.ClipMode.DISABLED;
 	this._weighted = false;
 	this._depthMap;
-	this._gradient = Potree.Gradients.RAINBOW;
+	this._gradient = Potree.Gradients.INFRARED;
 	this._classification = Potree.Classification.DEFAULT;
 	this.gradientTexture = Potree.PointCloudMaterial.generateGradientTexture(this._gradient);
 	this.classificationTexture = Potree.PointCloudMaterial.generateClassificationTexture(this._classification);
