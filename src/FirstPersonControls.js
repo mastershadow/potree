@@ -312,7 +312,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 			panEnd.set( event.clientX, event.clientY );
 			panDelta.subVectors( panEnd, panStart );
 			//panDelta.multiplyScalar(this.moveSpeed).multiplyScalar(0.0001);
-			panDelta.multiplyScalar(0.0005).multiplyScalar(scope.moveSpeed);
+			panDelta.multiplyScalar(0.075).multiplyScalar(scope.moveSpeed);
 			
 			scope.pan( panDelta.x, panDelta.y );
 

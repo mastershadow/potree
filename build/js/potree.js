@@ -1697,14 +1697,14 @@ Potree.Gradients = {
 		[1, new THREE.Color(1, 0, 0)]
 	],
 	INFRARED: [
-[0/7, new THREE.Color(20/255.0, 7/255.0, 20/255.0)],
-[1/7, new THREE.Color(155/255.0, 86/255.0, 195/255.0)],
-[2/7, new THREE.Color(36/255.0, 67/255.0, 253/255.0)],
-[3/7, new THREE.Color(1/255.0, 188/255.0, 255/255.0)],
-[4/7, new THREE.Color(0/255.0, 195/255.0, 100/255.0)],
-[5/7, new THREE.Color(255/255.0, 61/255.0, 0/255.0)],
-[6/7, new THREE.Color(254/255.0, 251/255.0, 125/255.0)],
-[7/7, new THREE.Color(255/255.0, 255/255.0, 255/255.0)]
+		[0/7, new THREE.Color(20/255.0, 7/255.0, 20/255.0)],
+		[1/7, new THREE.Color(155/255.0, 86/255.0, 195/255.0)],
+		[2/7, new THREE.Color(36/255.0, 67/255.0, 253/255.0)],
+		[3/7, new THREE.Color(1/255.0, 188/255.0, 255/255.0)],
+		[4/7, new THREE.Color(0/255.0, 195/255.0, 100/255.0)],
+		[5/7, new THREE.Color(255/255.0, 61/255.0, 0/255.0)],
+		[6/7, new THREE.Color(254/255.0, 251/255.0, 125/255.0)],
+		[7/7, new THREE.Color(255/255.0, 255/255.0, 255/255.0)]
 	],
 	GRAYSCALE: [
 		[0, new THREE.Color(0,0,0)],
@@ -2875,7 +2875,7 @@ THREE.FirstPersonControls = function ( object, domElement ) {
 			panEnd.set( event.clientX, event.clientY );
 			panDelta.subVectors( panEnd, panStart );
 			//panDelta.multiplyScalar(this.moveSpeed).multiplyScalar(0.0001);
-			panDelta.multiplyScalar(0.0005).multiplyScalar(scope.moveSpeed);
+			panDelta.multiplyScalar(0.075).multiplyScalar(scope.moveSpeed);
 			
 			scope.pan( panDelta.x, panDelta.y );
 
